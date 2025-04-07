@@ -1,0 +1,26 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Compatibility {
+  id        Int      @id @default(autoincrement())
+  name1       String
+  gender1     String
+  name2       String
+  gender2     String
+  percent     Float
+  image       String
+  description String
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+}
+
+model User {
+  id      Int      @id
+  results Compatibility[]
+}
